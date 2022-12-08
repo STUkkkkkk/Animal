@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <title>宠物网</title>
+    <link rel="icon" href="./../images/dog.ico">
+    <!--不同屏幕尺寸根字体设置-->
+    <script src="./../js/base.js"></script>
+    <!--element-ui的样式-->
+    <link rel="stylesheet" href="../../backend/plugins/element-ui/index.css" />
+    <!-- 引入样式  -->
+    <link rel="stylesheet" href="../styles/index.css" />
+    <!--本页面内容的样式-->
+    <link rel="stylesheet" href="./../styles/showTime.css" />
+</head>
+<body>
+<div id="showTime" class="app">
+    <div class="divHead">
+        <div class="divTitle">
+            宠物平台
+        </div>
+    </div>
+    <div class="divContent">
+<!--        <img src="./../images/no_wifi.png"/>-->
+        <div class="btnRefresh" style="margin-top: 62%" @click="toIndex">宠物商城</div>
+        <div class="btnRefresh" style="margin-top: 3%" @click="toAtlas">宠物图鉴</div>
+        <div class="btnRefresh" style="margin-top: 3%" @click="toKnowLedge">宠物知识</div>
+        <div class="btnRefresh" style="margin-top: 3%" @click="shutdown">退出</div>
+
+    </div>
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="../../backend/plugins/vue/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="../../backend/plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="../../backend/plugins/axios/axios.min.js"></script>
+<script src="./../js/request.js"></script>
+<script>
+    new Vue({
+        el:"#showTime",
+        data(){
+            return {
+            }
+        },
+        computed:{},
+        created(){
+
+        },
+        mounted(){},
+        methods:{
+            toIndex(){
+                window.location.href = "../index.html";
+            },
+            shutdown() {
+                if(confirm("您确定要退出系统吗？")) {
+                    var userAgent = navigator.userAgent;
+                    if(this.isWeiXin()) {
+                        WeixinJSBridge.call('closeWindow');
+                    }
+                    if(!this.isPc()){
+                        window.opener=null;window.open('about:blank','_self','').close();
+                    }
+                    if (userAgent.indexOf("Firefox") != -1 || userAgent.indexOf("Chrome") !=-1) {
+                        window.location.href="about:blank";
+                    }
+                    else {
+                        window.opener = null;
+                        window.open("about:blank", "_self");
+                        window.close();
+                    }
+                }
+                else{
+                }
+
+            },
+            isWeiXin() {
+                var ua = window.navigator.userAgent.toLowerCase();
+                if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return true;
+                }
+                else {
+                return false;
+                }
+            },
+            isPc() {
+        var userAgent = navigator.userAgent;
+        let Agents = ["Android", "iPhone",
+            "SymbianOS", "Windows Phone",
+            "iPad", "iPod"];
+        var flag=true;
+        for (let v = 0; v < Agents.length; v++) {
+            if (userAgent.indexOf(Agents[v]) > 0) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    },
+            toAtlas(){
+                window.location.href = "./pet-atlas.html"
+            },
+            toKnowLedge(){
+                window.location.href = "./knowLedge.html"
+            }
+    }
+    })
+</script>
+</body>
+</html>

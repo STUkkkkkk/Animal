@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <title>宠物网</title>
+    <link rel="icon" href="./../images/dog.ico">
+    <!--不同屏幕尺寸根字体设置-->
+    <script src="./../js/base.js"></script>
+    <!--element-ui的样式-->
+    <link rel="stylesheet" href="../../backend/plugins/element-ui/index.css" />
+    <!-- 引入样式  -->
+    <link rel="stylesheet" href="../styles/index.css" />
+    <!--本页面内容的样式-->
+    <link rel="stylesheet" href="./../styles/knowLedge.css" />
+</head>
+<body>
+<div id="knowLedge" class="app">
+    <div class="divHead">
+        <div class="divTitle">
+            <i class="el-icon-arrow-left" @click="goBack"></i>文章详情
+        </div>
+    </div>
+
+    <div class="BlogTitle">
+        {{title}}
+    </div>
+
+    <div v-html="message">
+
+    </div>
+
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="../../backend/plugins/vue/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="../../backend/plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="../../backend/plugins/axios/axios.min.js"></script>
+<script src="./../js/request.js"></script>
+<script src="./../api/blog.js"></script>
+<script>
+    new Vue({
+        el:"#knowLedge",
+        data(){
+            return {
+                title:'sacdvsdvdssasa',
+                message: "<div class=\"text\"> \n <p>爱猫爱狗人士，坐车出门也要将宠物带在一起，这本来无可厚非。但如果影响了驾驶安全那就要承担责任了。前两天，一名驾驶员把一只活猫放在方向盘前台的仪表台上开车，着实让人想不通。</p>\n <p><img alt=\"方向盘前有只活猫\" src=\"//img.chongshe.cn/75101d4bbfa25675.jpg\"></p>\n <p>12月9日晚，江北区公安分局交巡警支队寸滩勤务大队在辖区寸滩立交开展交通秩序整治，大力查处夜间各项违法行为。21时许，民警发现前方一辆微型轿车的驾驶室前挡风玻璃上，有一不明物体来回移动，民警于是立即将该车拦截盘查。摇下车窗时民警大吃一惊，竟然是一只宠物猫在仪表台上不停走动。经询问，驾驶员汤某称：“我的猫生病了，我才把它带去看了医生。因为看见它生病我很心疼，所以就把可怜的它放在了方向盘前面，这样就可以随时安抚它的情绪。”民警听完汤某的陈述后对其进行了严厉的批评：“你知道你这样做多危险吗？我们走过来的时候你的猫一直在来回走动，不仅阻挡了你的视线，而且万一它突然情绪失控，碰到了你的方向盘，那后果可是完全不敢想象的。”</p>\n <p>依据《中华人民共和国道路交通安全法》第九十条，驾车时有其他妨碍安全行车的行为，对汤某处以记2分，罚款50元的处罚。</p>\n <p>交巡警提醒：宠物生性活泼好动，容易干扰驾驶员产生不良影响，严重时甚至容易引发交通事故，携带宠物驾驶外出时最好用牵引绳栓在后排座位上，或放在宠物背包、宠物箱内。</p> \n</div>",
+            }
+        },
+        computed:{},
+        created(){
+            this.getBlog();
+        },
+        mounted(){},
+        methods:{
+            goBack() {
+                history.go(-1)
+            },
+            async getBlog() {
+                let search = window.location.search;
+                let strings = search.split("=");
+                const res = await getBlogByIdApi(strings[1]);
+                this.message = res.data.content;
+                this.title = res.data.name;
+            }
+        }
+    })
+</script>
+</body>
+</html>

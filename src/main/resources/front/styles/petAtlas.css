@@ -1,0 +1,126 @@
+#petAtlas .divHead {
+    width: 100%;
+    height: 55rem;
+    opacity: 1;
+    background: #333333;
+    position: relative;
+}
+
+#petAtlas .divHead .divTitle {
+    font-size: 18rem;
+    font-family: PingFangSC, PingFangSC-Regular;
+    font-weight: 500;
+    text-align: center;
+    color: #ffffff;
+    line-height: 25rem;
+    letter-spacing: 0;
+    position: absolute;
+    bottom: 13rem;
+    width: 100%;
+}
+
+#petAtlas .divHead .divTitle i {
+    position: absolute;
+    left: 16rem;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+#petAtlas .divContent {
+    height: calc(100vh - 55rem);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+#petAtlas .divContent img {
+    width: 239rem;
+    height: 130rem;
+    margin-top: 104rem;
+    margin-bottom: 19rem;
+}
+
+#petAtlas .divContent .divDesc {
+    height: 33rem;
+    opacity: 1;
+    font-size: 24rem;
+    font-family: PingFangSC, PingFangSC-Regular;
+    font-weight: 500;
+    text-align: center;
+    color: #333333;
+    line-height: 33rem;
+    letter-spacing: 0;
+    margin-bottom: 20rem;
+}
+
+.btnRefresh {
+    width: 124rem;
+    height: 36rem;
+    opacity: 1;
+    margin-left: -4px;
+    border-radius: 18px;
+    opacity: 1;
+    font-size: 23rem;
+    font-family: 楷体;
+    font-weight: 600;
+    text-align: center;
+    color: #333333;
+    line-height: 21rem;
+    letter-spacing: 0;
+    line-height: 36rem;
+}
+
+.divButton{
+    width: 100%;
+    height: 7%;
+    background-color: #3a8ee6;
+}
+.btnDog{
+    float: left;
+}
+
+.btnAnimal{
+    width:50%;
+    height: 100%;
+    font-family: 楷体;
+    font-size: 20px;
+    border: none;
+    background-color: #d9ecff;
+}
+
+.btnActive{
+    background: radial-gradient(circle, rgba(247, 150, 192, 1) 0%, rgba(118, 174, 241, 1) 100%);
+    color: #fff;
+}
+
+.btnCat{
+    float: left;
+}
+
+.dataPlace{
+    width: 35%;
+    height: 35%;
+    margin-left: 10%;
+    margin-top: 5%;
+    float: left;
+}
+.AnimalImage{
+    width: 95%;
+    height: 95%;
+    text-align: center;
+}
+
+.AnimalFont{
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
+    font-family: 楷体;
+    font-size: 20px;
+}
+
+.divAnimal{
+    width: 100%;
+    height: auto;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <title>宠物网</title>
+    <link rel="icon" href="./../images/dog.ico">
+    <!--不同屏幕尺寸根字体设置-->
+    <script src="./../js/base.js"></script>
+    <!--element-ui的样式-->
+    <link rel="stylesheet" href="../../backend/plugins/element-ui/index.css" />
+    <!-- 引入样式  -->
+    <link rel="stylesheet" href="../styles/index.css" />
+    <!--本页面内容的样式-->
+    <link rel="stylesheet" href="./../styles/petAtlas.css" />
+</head>
+<body>
+<div id="petAtlas" class="app">
+    <div class="divHead">
+        <div class="divTitle">
+            <i class="el-icon-arrow-left" @click="goBack"></i>宠物图鉴
+        </div>
+    </div>
+    <div class="divButton">
+        <button class="btnDog btnAnimal" id="Dog" @click="getDog()">狗子</button>
+        <button class="btnCat btnAnimal" id="Cat" @click="getCat">猫咪</button>
+    </div>
+
+
+    <div class="divAnimal">
+        <div class="dataPlace" v-for="(item,i) in data" @click="toAnimal(item.id)">
+            <img class="AnimalImage" :src="item.url">
+            <h4 class="AnimalFont">{{item.name}}</h4>
+        </div>
+    </div>
+
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="../../backend/plugins/vue/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="../../backend/plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="../../backend/plugins/axios/axios.min.js"></script>
+<script src="./../js/request.js"></script>
+<script src="./../api/animal.js"></script>
+<script>
+    new Vue({
+        el:"#petAtlas",
+        data(){
+            return {
+                isDog: 1,
+                data: [
+                    {"name":"爱尔兰猎狼犬","id":2,"url":"http://i1.bagong.cn/be/08/97970ca90532a634a90b03f7f6d7_280x250_1.jpg"},
+                    {"name":"大麦町犬","id":13,"url":"http://i1.bagong.cn/7e/70/cccb8715d521f3eb5674d37349c9_280x250_1.jpg"},
+                    {"name":"爱尔兰猎狼犬","id":2,"url":"http://i1.bagong.cn/be/08/97970ca90532a634a90b03f7f6d7_280x250_1.jpg"},{"name":"短脚长身梗","id":3,"url":"http://i1.bagong.cn/58/ff/814ac6e76b4087a55569fc521042_280x250_1.jpg"},{"name":"爱尔兰雪达犬","id":4,"url":"http://i1.bagong.cn/5c/3e/6aee5b2f5fa26e64ef9939d61dab_280x250_1.jpg"},{"name":"阿拉斯加雪橇犬","id":5,"url":"http://i1.bagong.cn/cd/c9/2751bac8ea409a71f97c0c97768d_280x250_1.jpg"},{"name":"阿富汗猎犬","id":6,"url":"http://i1.bagong.cn/ce/ae/79f4605ab329f997449520856fb9_280x250_1.jpg"},{"name":"伯恩山犬","id":7,"url":"http://i1.bagong.cn/23/92/44448d0bd61a89c6475531f71db4_280x250_1.jpg"},{"name":"博美犬","id":8,"url":"http://i1.bagong.cn/f4/44/eb76556f2028ce6107adf008c268_280x250_1.jpg"},{"name":"波尔多犬","id":9,"url":"http://i1.bagong.cn/26/5e/4784fd8bb100fce94361c46eda23_280x250_1.jpg"}
+                    ,{"name":"爱尔兰猎狼犬","id":2,"url":"http://i1.bagong.cn/be/08/97970ca90532a634a90b03f7f6d7_280x250_1.jpg"},{"name":"短脚长身梗","id":3,"url":"http://i1.bagong.cn/58/ff/814ac6e76b4087a55569fc521042_280x250_1.jpg"},{"name":"爱尔兰雪达犬","id":4,"url":"http://i1.bagong.cn/5c/3e/6aee5b2f5fa26e64ef9939d61dab_280x250_1.jpg"},{"name":"阿拉斯加雪橇犬","id":5,"url":"http://i1.bagong.cn/cd/c9/2751bac8ea409a71f97c0c97768d_280x250_1.jpg"},{"name":"阿富汗猎犬","id":6,"url":"http://i1.bagong.cn/ce/ae/79f4605ab329f997449520856fb9_280x250_1.jpg"},{"name":"伯恩山犬","id":7,"url":"http://i1.bagong.cn/23/92/44448d0bd61a89c6475531f71db4_280x250_1.jpg"},{"name":"博美犬","id":8,"url":"http://i1.bagong.cn/f4/44/eb76556f2028ce6107adf008c268_280x250_1.jpg"},{"name":"波尔多犬","id":9,"url":"http://i1.bagong.cn/26/5e/4784fd8bb100fce94361c46eda23_280x250_1.jpg"}
+
+                ]
+            }
+        },
+        computed:{},
+        created(){
+            this.getDog();
+        },
+        mounted(){},
+        methods:{
+            goBack() {
+                history.go(-1)
+            },
+            async getDog() {
+                this.isDog = 1;
+                document.getElementById("Cat").classList.remove("btnActive");
+                document.getElementById("Dog").classList.add("btnActive");
+                const res = await getAllDog();
+                if(res.code === 1){
+                    this.data = res.data;
+                }
+            },
+            async getCat() {
+                this.isDog = 0;
+                document.getElementById("Cat").classList.add("btnActive");
+                document.getElementById("Dog").classList.remove("btnActive");
+                const res = await getAllCat();
+                if(res.code === 1){
+                    this.data = res.data;
+                }
+            },
+            toAnimal(id){
+                    let url = '/front/page/petShow.html?isDog='+this.isDog+'&id='+id;
+                    console.log(url);
+                    window.location.href = url;
+            },
+        }
+    })
+</script>
+</body>
+</html>

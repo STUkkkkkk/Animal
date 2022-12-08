@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
+  <title>宠物网</title>
+  <link rel="icon" href="./../images/dog.ico">
+  <!--不同屏幕尺寸根字体设置-->
+  <script src="./../js/base.js"></script>
+  <!--element-ui的样式-->
+  <link rel="stylesheet" href="../../backend/plugins/element-ui/index.css" />
+  <!-- 引入样式  -->
+  <link rel="stylesheet" href="../styles/index.css" />
+  <!--本页面内容的样式-->
+  <link rel="stylesheet" href="./../styles/petShow.css" />
+</head>
+<body>
+<div id="petShow" class="app">
+  <div class="divHead">
+    <div class="divTitle">
+      <i class="el-icon-arrow-left" @click="goBack"></i>宠物详情
+    </div>
+  </div>
+
+  <div class="divName">
+    <h3>{{data.name}}</h3>
+    <h4>{{data.englishName}}</h4>
+  </div>
+
+  <div class="divMid">
+    <img :src="data.url"/>
+  </div>
+
+  <div class="divShuXing">
+    <ul>
+      <li v-if="data.weight">
+        <button>体重</button>
+        : {{data.weight}}
+      </li>
+      <el-divider v-if="data.weight" class="Divider"></el-divider>
+      <li v-if="data.allName">
+        <button>全名</button>
+        : {{data.allName}}
+      </li>
+      <el-divider v-if="data.allName" class="Divider"></el-divider>
+      <li v-if="data.ability">
+        <button>功能</button>
+        : {{data.ability}}
+      </li>
+      <el-divider v-if="data.ability" class="Divider"></el-divider>
+      <li v-if="data.position">
+        <button>原产地</button>
+        : {{data.position}}
+      </li>
+      <el-divider v-if="data.position" class="Divider"></el-divider>
+      <li v-if="data.name">
+        <button>名称</button>
+        : {{data.name}}
+      </li>
+      <el-divider v-if="data.name" class="Divider"></el-divider>
+      <li v-if="data.life">
+        <button>寿命</button>
+        : {{data.life}}
+      </li>
+      <el-divider v-if="data.life" class="Divider"></el-divider>
+      <li v-if="data.wool">
+        <button>毛长</button>
+        : {{data.wool}}
+      </li>
+      <el-divider v-if="data.wool" class="Divider"></el-divider>
+      <li v-if="data.type">
+        <button>类型</button>
+        : {{data.type}}
+      </li>
+      <el-divider v-if="data.type" class="Divider"></el-divider>
+      <li v-if="data.englishName">
+        <button>英文名</button>
+        : {{data.englishName}}
+      </li>
+      <el-divider v-if="data.englishName" class="Divider"></el-divider>
+      <li v-if="data.height">
+        <button>身高</button>
+        : {{data.height}}
+      </li>
+      <el-divider v-if="data.height" class="Divider"></el-divider>
+    </ul>
+  </div>
+
+  <div class="divAbs">
+    <el-divider>简介</el-divider>
+    <div class="divDiv">
+      {{data.abs}}
+    </div>
+    <el-divider class="Divider"></el-divider>
+  </div>
+
+  <div class="divImage">
+<!--    照片墙-->
+    <el-divider>照片墙</el-divider>
+    <div class="Image" v-for="(item,i) in data.image.split(',')">
+      <img :src="item"/>
+    </div>
+  </div>
+
+</div>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="../../backend/plugins/vue/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="../../backend/plugins/element-ui/index.js"></script>
+<!-- 引入axios -->
+<script src="../../backend/plugins/axios/axios.min.js"></script>
+<script src="./../js/request.js"></script>
+<script src="./../api/animal.js"></script>
+<script>
+  new Vue({
+    el:"#petShow",
+    data(){
+      return {
+        data:
+          {"id":2,"name":"爱尔兰猎狼犬","url":"http://i1.bagong.cn/be/08/97970ca90532a634a90b03f7f6d7_280x250_1.jpg","weight":"40-55千克","allName":"爱尔兰猎狼犬","ability":"伴侣犬,狩望猎犬","position":"爱尔兰","life":"6-8年","wool":"长毛","type":"大型","englishName":"IrishWolfhound","height":"71-90厘米","abs":"爱尔兰猎狼犬是一种大型、多毛并且毛粗的猎犬，因为猎犬的体形庞大，因此它的的主人需要拥有足够大的庭院提供给爱犬栖身之所，这样才足以满足这种生性好动的猎犬其捕猎天性。爱尔兰猎狼犬在捕猎的锻炼中逐步获取了猎手般敏锐的视力、高大的四肢、强健的体魄与爆发力。深胸可以提供给它很大的呼吸容纳空间，从而增强它的耐力。","image":"http://i1.bagong.cn/e8/df/c9ad3af82b7ccdf789064bfb76d4_100x100_1.jpg,http://i1.bagong.cn/be/08/97970ca90532a634a90b03f7f6d7_100x100_1.jpg,http://i1.bagong.cn/be/08/97970ca90532a634a90b03f7f6d7_100x100_1.jpg,http://i1.bagong.cn/be/08/97970ca90532a634a90b03f7f6d7_100x100_1.jpg"},
+        id: 1,
+      }
+    },
+    computed:{},
+    created(){
+      this.getAnimal();
+    },
+    mounted(){},
+    methods:{
+      goBack() {
+        history.go(-1)
+      },
+      async getAnimal() {
+        let search = window.location.search;
+        let now = search.substring(1, search.length);
+        let strings = now.split("&");
+        let first = strings[0].split("=");
+        console.log(first)
+        if (first[1] === "1") {
+          //是查狗狗
+          const res = await getDogByIdApi(strings[1].split("=")[1]);
+          if(res.code === 1){
+            console.log(res)
+            this.data = res.data;
+          }
+        } else if(first[1] === "0"){
+          //是查猫咪
+          const res = await getCatByIdApi(strings[1].split("=")[1]);
+          if(res.code === 1){
+            this.data = res.data;
+          }
+        }
+        console.log(now);
+      }
+    }
+  })
+</script>
+</body>
+</html>
