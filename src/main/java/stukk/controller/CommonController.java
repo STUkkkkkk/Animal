@@ -1,5 +1,4 @@
 package stukk.controller;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +18,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.UUID;
 
+import static stukk.common.FilePath.basePath;
+
 /**
  * @author wenli
  * @create 2022-09-01 21:16
@@ -29,8 +30,7 @@ import java.util.UUID;
 @Slf4j
 @Api(tags = "文件管理（CommonController）")
 public class CommonController {
-    @Value("${reggie.path}")
-    private String basePath;
+
 
     /**
      * 文件上转

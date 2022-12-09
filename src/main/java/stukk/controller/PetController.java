@@ -29,6 +29,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import static stukk.common.FilePath.basePath;
+
 /**
  * @author wenli
  * @create 2022-12-06 23:13
@@ -37,8 +39,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/pet")
 @Api(tags = "宠物管理器（PetController）")
 public class PetController {
-    @Value("${reggie.path}")
-    private String basePath;
 
     @Resource
     private PetService petService;

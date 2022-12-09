@@ -18,14 +18,15 @@ import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static stukk.common.FilePath.basePath;
+
 /**
  * @author wenli
  * @create 2022-09-01 18:10
  */
 @Service("setmealService")
 public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> implements SetmealService {
-    @Value("${reggie.path}")
-    private String basePath;
+
 
     @Resource
     private SetmealGoodsService setmealGoodsService;
